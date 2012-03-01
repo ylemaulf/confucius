@@ -104,7 +104,6 @@ class Membership(ConfuciusModel):
         return self._has_role('S')
         
 
-
 class MessageTemplate(ConfuciusModel):
     title = models.CharField(max_length=100, default=None)
     content = models.TextField(default=None)
