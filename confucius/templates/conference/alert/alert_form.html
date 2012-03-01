@@ -1,14 +1,15 @@
 {% extends 'base-in.html' %}
 {% load url from future %}
 
-{% block title %}{{ alert.title }}{% endblock %}
+{% block title %}{% if alert.title %} {{ alert.title }} {% else %} Create new alert {% endif %}{% endblock %}
+
+{% block brand %}Conference "{{ conference.title }}"  {% if not conference.is_open %}(closed){% endif %}{% endblock %}
 
  {% block content_header %}
- <h1>{{ alert.title}}</h1>
+ <h1> {% if alert.title %} {{ alert.title}} {% else %} Create new alert {% endif %}</h1>
 {% endblock %}
 
-{% block subtopbar %}
-{% endblock %}
+
 
 {% block content_main %}
 <form class="form-horizontal" method="post">{% csrf_token %}
