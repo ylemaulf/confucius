@@ -103,8 +103,6 @@ class Membership(ConfuciusModel):
     def has_submitter_role(self):
         return self._has_role('S')
         
-    def __unicode__(self):
-        return self.user.email+" - "+self.conference.title
 
 
 class MessageTemplate(ConfuciusModel):
