@@ -174,6 +174,7 @@ def conference_invite(request, template_name='conference/invitation_form.html'):
 
     context = {
         'form': form,
+        'conference': request.conference,
     }
 
     return render_to_response(template_name, context, context_instance=RequestContext(request))

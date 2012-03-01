@@ -3,6 +3,8 @@
 
 {% block title %}Invite someone to participate{% endblock %}
 
+{% block brand %}Conference "{{ conference.title }}"  {% if not conference.is_open %}(closed){% endif %}{% endblock %}
+
 {% block content_header %}
 <h1>Invite someone to participate in the Conference</h1>
 {% endblock %}
