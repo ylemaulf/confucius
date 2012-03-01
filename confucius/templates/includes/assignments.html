@@ -9,87 +9,116 @@
     </div>
 </div>
 
-<p><strong>Automatic assignment : </strong><a id="auto_assignment" href="#" class="btn btn-info" > Let's do it </a> 
-
-    <span class="add-on">
-        <i class="icon icon-pencil"></i>
-    </span><input class="input-medium" type="text" name="avg_assi_by_paper" id="avg_assi_by_paper" placeholder="Average by paper" maxlength="4" rel="tooltip" title="Average by paper" /> 
-    <span class="add-on">
-        <i class="icon icon-pencil"></i>
-    </span>
-    <input class="input-medium" type="text" name="avg_assi_by_reviewer" id="avg_assi_by_reviewer" placeholder="Average by reviewer" maxlength="4" rel="tooltip" title="Average by reviewer" /></p>
-</p>
-<p>
-    <a href="{% url finalize_assignment conference.pk %}" class="btn btn-primary" > Finalize assignments </a> 
-</p>
-<div id="container">
-    <table class="table table-bordered" id="datas">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Authors</th>
-                <th>Submitter</th>
-                <th>Domains</th>
-                <th>Reviewers</th>
-                <th>Language</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for paper in papers %}
-            <tr class="infos" id="{{paper.pk}}">
-                <td><strong>{{ paper.title }}</strong></td>
-                <td> {{paper.co_authors}} </td>
-                <td> {{paper.submitter}} </td>
-                <td>
-                    {{paper.domains.all|join:', '}}
-                </td>
-                <td id="assignments_{{paper.pk}}">{{paper.assignments.all.count}}</td>
-                <td>{{paper.language}}</td>
-                <td><i class="pull-right icon icon-chevron-down"></i></td>
-                
-                <tr class="actions">
-                    
-                        <td colspan="7">
-                            <table class="table table-bordered reviewers" id="table_{{paper.pk}}">
-                                <tr>
-                                    
-                                    <th>Reviewer</th>
-                                    <th>Domains</th>
-                                    <th>Languages</th>
-                                    <th>Assignation number</th>
-                                    <th></th>
-                                </tr>
-                                {% for assignment in paper.assignments.all %}
-                                    <tr>
-                                        <td>{{assignment.reviewer}}</td>
-                                        <td>{{assignment.get_domains.all|join:', '}}</td>
-                                        <td>{{assignment.reviewer.languages.all|join:', '}}</td>
-                                        <td id="paper_count_{{assignment.pk}}" >{{assignment.get_papers.count}}</td>
-                                        <td><a href="#" class="btn btn-danger assignment" id="remove_{{assignment.pk}}--table_{{paper.pk}}">Remove</th></td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                            
-                            <div class="toto">
-                                <form>
-                                    <label class="control-label">Click on the reviewers below to assign them on the current Paper</label>
-                                    <select multiple="multiple" class="selectAdd input-xxlarge multiSelect" id="reviewers_list_{{paper.pk}}">
-                                       
-                                    </select>
-                                    <label class="control-label" for="tags">Search reviewer :</label>
-				                  	<div class="controls">
-						                <input type="text" id="textbox" class="span3" placeholder="Reviewer" value=""/>
-                                    </div>
-                                </form>
+<div class="row">
+    <div class="span10">
+        <form>
+            <legend>Automatic assignment</legend>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="row">
+                        <div class="span3">
+                            <div class="input-prepend">
+                                <span class="add-on">
+                                    <i class="icon icon-pencil"></i>
+                                </span>
+                                <input class="input-medium" type="text" name="avg_assi_by_paper" id="avg_assi_by_paper" placeholder="Maximum by paper" maxlength="4" rel="tooltip" title="Maximum by paper" />
                             </div>
-                        </td>
-                   
+                        </div>
+                        <div class="span3">
+                            <div class="input-prepend">
+                                <span class="add-on">
+                                    <i class="icon icon-pencil"></i>
+                                </span>
+                                <input class="input-medium" type="text" name="avg_assi_by_reviewer" id="avg_assi_by_reviewer" placeholder="Maximum by reviewer" maxlength="4" rel="tooltip" title="Maximum by reviewer" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="pull-right">
+                                <a id="auto_assignment" href="#" class="btn btn-info" >Automatic</a>
+                                <a href="{% url finalize_assignment conference.pk %}" class="btn btn-primary" >Finalize</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span10">
+        <table class="table table-bordered" id="datas">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Submitter</th>
+                    <th>Domains</th>
+                    <th>Reviewers</th>
+                    <th>Language</th>
+                    <th></th>
                 </tr>
-            </tr>
-            {% empty %}
-                <h3>There is no papers for this conference</h3><br/>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for paper in papers %}
+                <div class="toggle hidden">
+                <tr id="{{paper.pk}}">
+                    <td><strong>{{ paper.title }}</strong></td>
+                    <td> {{paper.co_authors}} </td>
+                    <td> {{paper.submitter}} </td>
+                    <td>
+                        {{paper.domains.all|join:', '}}
+                    </td>
+                    <td id="assignments_{{paper.pk}}">{{paper.assignments.all.count}}</td>
+                    <td>{{paper.language}}</td>
+                    <td><i class="pull-right icon icon-chevron-down"></i></td>
+                    
+                    <tr class="actions">
+                        
+                            <td colspan="7">
+                                <table class="table table-bordered reviewers" id="table_{{paper.pk}}">
+                                    <tr>
+                                        
+                                        <th>Reviewer</th>
+                                        <th>Domains</th>
+                                        <th>Languages</th>
+                                        <th>Assignation number</th>
+                                        <th></th>
+                                    </tr>
+                                    {% for assignment in paper.assignments.all %}
+                                        <tr>
+                                            <td>{{assignment.reviewer}}</td>
+                                            <td>{{assignment.get_domains.all|join:', '}}</td>
+                                            <td>{{assignment.reviewer.languages.all|join:', '}}</td>
+                                            <td id="paper_count_{{assignment.pk}}" >{{assignment.get_papers.count}}</td>
+                                            <td><a href="#" class="btn btn-danger assignment" id="remove_{{assignment.pk}}--table_{{paper.pk}}">Remove</th></td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                                
+                                <div class="toto">
+                                    <form>
+                                        <label class="control-label">Click on the reviewers below to assign them on the current Paper</label>
+                                        <select multiple="multiple" class="selectAdd input-xxlarge multiSelect" id="reviewers_list_{{paper.pk}}">
+                                           
+                                        </select>
+                                        <label class="control-label" for="tags">Search reviewer :</label>
+				                      	<div class="controls">
+						                    <input type="text" id="textbox" class="span3" placeholder="Reviewer" value=""/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                       
+                    </tr>
+                </tr>
+                </div>
+                {% empty %}
+                <tr>
+                    <td><h3>There is no papers for this conference</h3></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>

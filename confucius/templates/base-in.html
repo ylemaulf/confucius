@@ -8,11 +8,10 @@
         <div class="container">
             <a class="brand">{% block brand %}Confucius{% endblock %}</a>
             <div class="nav-collapse">
-                <div class="pull-right navbar-text logo"> 
-                    <i class="icon-user icon-white"></i>
-                    <ul class="nav pull-right">
-                        <li id="fat-menu" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.first_name }} {{ user.last_name }}<b class="caret"></b></a>
+                <div class="pull-right logo"> 
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  {{ user.first_name }} {{ user.last_name }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'account' %}">Edit my account</a></li>
                                 <li class="divider"></li>
@@ -20,9 +19,6 @@
                             </ul>
                         </li>
                     </ul>
-                     <a class="dropdown-toggle" data-toggle="dropdown" >
-                        <b class="caret"></b>
-                    </a>
                 </div>
             </div>
         </div>
@@ -35,30 +31,36 @@
     <div class="row" role="main">
         {% block sidebar %}
         <div class="span2">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header {{ 'dashboard'|active:request }}"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                    {% block subnav %}{% endblock %}
-                    <li class="nav-header {{ 'list'|active:request }}"><a href="{% url 'membership_list' %}">Conferences</a></li>
-                    <li class="nav-header {{ 'account'|active:request }}"><a href="{% url 'account' %}">Account</a></li>
-                </ul>
+            <div class="row">
+                <div class="span2">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                            <li class="nav-header {{ 'dashboard'|active:request }}"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            {% block subnav %}{% endblock %}
+                            <li class="nav-header {{ 'list'|active:request }}"><a href="{% url 'membership_list' %}">Conferences</a></li>
+                            <li class="nav-header {{ 'account'|active:request }}"><a href="{% url 'account' %}">Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span2 db-top">
+                    {% block subtopbar %}
+                        <div class="well sidebar-dates">
+                            <ul class="nav nav-list">
+                                <li>Conference: {{ conference.start_date|date:'SHORT_DATE_FORMAT' }}</li>
+                                <li>Submissions end: {{ conference.submissions_end_date|date:'SHORT_DATE_FORMAT' }}</li>
+                                <li>Reviews end: {{ conference.reviews_end_date|date:'SHORT_DATE_FORMAT' }}</li>
+                           </ul>
+                        </div>
+                    {% endblock %}
+                </div>
             </div>
         </div>
         {% endblock %}
 
         {% block content %}
         <div class="span10 content">
-             <div class="row">
-                <div class="span10 db-top">
-                    {% block subtopbar %}
-                        <div class="db-top-inner-min">
-                            <i class="icon-calendar"></i> Start date {{ conference.start_date|date:'SHORT_DATE_FORMAT' }} | 
-                            <i class="icon-info-sign"></i> Submissions end date {{ conference.submissions_end_date|date:'SHORT_DATE_FORMAT' }} | 
-                            <i class="icon-exclamation-sign"></i> Reviews end date {{ conference.reviews_end_date|date:'SHORT_DATE_FORMAT' }}
-                        </div>
-                    {% endblock %}
-                </div>
-            </div>
             <div class="row">
                  <div class="span10">
                     <header class="well page-header">

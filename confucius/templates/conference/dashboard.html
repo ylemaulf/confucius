@@ -260,45 +260,25 @@
 
 {% endblock %}
 
-{% block style %}
-<style>
-    .toggle-top h2 {
-        margin-bottom: 15px;
-        padding: 10px 15px 5px 5px;
-        border-top: 3px solid lightgrey;
-        background-color: #f8f8f8;
-    }
-    .toggle-top h2:hover {
-        cursor: pointer;
-    }
-    .toggle-buttons {
-        margin-bottom: 15px;
-        text-align: center;
-    }
-    .toggled {
-        padding-top: 15px;
-        border-top: 1px solid lightgrey;
-    }
-    .toggled h3 {
-        padding-left: 5px;
-    }
-</style>
-{% endblock %}
-
 {% block script %}
 <script>
     $(function() {
         {% if membership.roles.count < 2 %}
-            $('.toggle-div').next().toggleClass('hidden');
-            $('.toggle-div').next().toggleClass('visible');
+            var $toggle = $('.toggle-div').parents('.toggle-top').next('.toggle');
+            $toggle.toggleClass('hidden');
+            $toggle.toggleClass('visible');
         {% endif %}
         $('.toggle-div').click(function() {
-            $(this).parents('.toggle-top').next('.toggle').slideToggle('slow');
-            $(this).parents('.toggle-top').next('.toggle').toggleClass('hidden');
-            $(this).parents('.toggle-top').next('.toggle').toggleClass('visible');
+            var $toggle = $(this).parents('.toggle-top').next('.toggle');
+            $toggle.slideToggle('slow', function() {
+                $toggle.toggleClass('hidden');
+                $toggle.toggleClass('visible');
+            });
             
-            $(this).find('.icon').toggleClass('icon-chevron-up')
-            $(this).find('.icon').toggleClass('icon-chevron-down');
+            var $icon = $(this).find('.icon');
+            $icon.toggleClass('icon-chevron-up')
+            $icon.toggleClass('icon-chevron-down');
+
             return false;
         });
     }); 

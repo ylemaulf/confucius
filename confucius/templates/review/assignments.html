@@ -2,18 +2,16 @@
 {% load url from future %}
 
 {% block title %}Assignments {% endblock %}
-{% block brand %}Conference "{{ conference.title }}"  
-{% endblock %}
-{% block content_header %}
-<h1>Assignments</h1><br/>
-{% endblock %}
+
+{% block brand %}Conference "{{ conference.title }}"{% endblock %}
+
+{% block content_header %}<h1>Assignments</h1>{% endblock %}
 
 {% block content_main %}
-
 {% include 'includes/assignments.html' %}
-
 {% endblock %}
-{% block extra_style %}
+
+{% block style %}
 <style>
     tr.infos:hover {
         cursor:pointer;

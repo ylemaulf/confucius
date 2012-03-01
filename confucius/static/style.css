@@ -14,7 +14,7 @@ body {
 }
 
 .content-header {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .controls > input {
@@ -43,9 +43,8 @@ body {
 
 /* Sidebar */
 
-.sidebar-nav {
+.sidebar-nav, .sidebar-dates {
     margin: 0;
-    padding: 15px 12px;
     background-color: #f8f8f8;
     border-top: 0;
     border-bottom: 3px solid lightgrey;
@@ -55,6 +54,19 @@ body {
     -webkit-box-shadow: inset 0 0 0 #000;
     -moz-box-shadow: inset 0 0 0 #000;
     box-shadow: inset 0 0 0 #000;
+}
+
+.sidebar-nav {
+    padding: 15px 0;
+}
+
+.sidebar-dates {
+    padding: 5px 0 15px 0;
+}
+
+.sidebar-dates ul li {
+    margin-top: 5px;
+    color: #888;
 }
 
 /* Content */
@@ -85,22 +97,28 @@ body {
     margin: 5px 0 0 5px;
 }
 
-/* Dashboard */
+/* toggle utils */
 
-.db-top {
-}
-
-.db-top-inner {
-    margin: 10px 15px 15px 15px;
-}
-
-.db-top-inner-min {
-    display:block;
-    padding: 2px 15px 2px 15px;
+.toggle-top h2 {
+    margin-bottom: 15px;
+    padding: 10px 15px 5px 5px;
+    border-top: 3px solid lightgrey;
     background-color: #f8f8f8;
-    border-bottom: 3px solid lightgrey;
 }
-
+.toggle-top h2:hover {
+    cursor: pointer;
+}
+.toggle-buttons {
+    margin-bottom: 15px;
+    text-align: center;
+}
+.toggled {
+    padding-top: 15px;
+    border-top: 1px solid lightgrey;
+}
+.toggled h3 {
+    padding-left: 5px;
+}
 
 /* TextPander */
 
