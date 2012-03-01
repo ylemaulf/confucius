@@ -155,5 +155,5 @@ class ConferenceAdmin(admin.ModelAdmin):
 site = admin.AdminSite()
 site.register(User, UserAdmin)
 site.register(Conference, ConferenceAdmin)
-site.register(Paper, PaperAdmin)
+site.register(Membership)
 
